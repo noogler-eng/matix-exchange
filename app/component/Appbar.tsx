@@ -7,8 +7,6 @@ export default function Appbar(){
     // useSession only work in client component
     const { data: session, status } = useSession()
 
-    console.log(session?.user?.image);
-
     return <div className="flex justify-between items-center px-4 py-3">
         <div className="text-3xl text-extrabold">
             MATIX
