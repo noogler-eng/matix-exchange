@@ -46,7 +46,7 @@ export default function ProfileCard({
       </div>
       <p className="text-sm text-gray-400 flex items-center gap-2"><span><WalletMinimal size={14}/></span>matix account assets</p>
       <div className="flex justify-between items-center">
-        <p className="text-5xl font-semibold">${(balance.toPrecision(3))} <span className="text-3xl text-gray-400">USD</span></p>
+        <p className="text-5xl font-semibold">${(balance.toFixed(2))} <span className="text-3xl text-gray-400">USD</span></p>
         <p className="text-sm text-gray-400">public key: {publicKey.slice(0,4)}...{publicKey.slice(-4)}</p>
       </div>
       <button onClick={()=>{

@@ -2,6 +2,7 @@ import prisma from "../db";
 import authconfig from "../lib/authConfig";
 import ProfileCard from "../component/profileCard";
 import { getServerSession } from "next-auth";
+import axios from "axios";
 
 const fetchData = async () => {
   const session = await getServerSession(authconfig);
@@ -32,8 +33,16 @@ const fetchData = async () => {
   }
 };
 
+
 export default async function Dashboard() {
   const user = await fetchData();
+  let balance;
+
+  try{
+    balance = await axios.get(`http://localhost:3000/api/tokens?address=GJka613DnHoTgf6P6p2hPvonSQ7U87ktVZtJedaF4BaA`)
+  }catch(error){
+    console.log(error);
+  }
 
   if (!user) {
     return (
@@ -43,11 +52,12 @@ export default async function Dashboard() {
     );
   }
 
+
   return (
     <div className="flex items-center justify-center h-full">
       <ProfileCard
         publicKey={user.user?.solWallet?.publicKey || ""}
-        balance={user.user?.inrWallet?.balance || 0}
+        balance={Number(balance?.data.msg) || 0}
       />
     </div>
   );
